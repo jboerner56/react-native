@@ -1,11 +1,13 @@
+/* eslint-disable no-console */
 /* eslint-disable indent */
 /* eslint-disable react/jsx-indent-props */
 /* eslint-disable react/jsx-indent */
 import React from 'react';
-import { View, StatusBar } from 'react-native';
+import { StatusBar } from 'react-native';
 import Container from '../components/Container';
 import { Logo } from '../components/Logo';
 import { Input } from '../components/CurrencyInput';
+import ClearButton from '../components/Buttons';
 
 const TEMP_BASE_CURRENCY = 'USD';
 const TEMP_QUOTE_CURRENCY = 'GBP';
@@ -24,6 +26,10 @@ class Home extends React.Component {
 
     handleChange = (text) => {
         console.log('change text', text);
+    };
+
+    handleSwap = () => {
+        console.log('currenty swapped');
     };
 
     render() {
@@ -45,7 +51,10 @@ class Home extends React.Component {
         editable={false}
         value={TEMP_QUOTE_PRICE}
         />
-        <View />
+        <ClearButton
+            text="Reverse Currencies"
+            onPress={this.handleSwap}
+        />
         </Container>
         );
     }
