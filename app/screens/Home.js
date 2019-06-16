@@ -22,8 +22,8 @@ class Home extends React.Component {
         console.log('press quote currency');
     };
 
-    handleChange = () => {
-        console.log('change text');
+    handleChange = (text) => {
+        console.log('change text', text);
     };
 
     render() {
@@ -34,12 +34,16 @@ class Home extends React.Component {
         <Input
             buttonText={TEMP_BASE_CURRENCY}
             onPress={this.handleBaseCurrency}
+            defaultValue={TEMP_BASE_PRICE}
+            keyboardType="numeric"
+            onChangeText={this.handleChange}
         />
         <Input
         // eslint-disable-next-line react/jsx-indent-props
         buttonText={TEMP_QUOTE_CURRENCY}
         onPress={this.handleQuoteCurrency}
         editable={false}
+        value={TEMP_QUOTE_PRICE}
         />
         <View />
         </Container>

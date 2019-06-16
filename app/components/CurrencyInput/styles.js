@@ -5,6 +5,8 @@ import { StyleSheet } from 'react-native';
 const inputHeight = 50;
 const BORDER_RADIUS = 5;
 export default EStyleSheet.create({
+    $buttonBackgroundBaseColor: '$white',
+    $buttonBackgroundBaseColorModifier: 0.3,
     container: {
         background: '$white',
         width: '90%',
@@ -13,6 +15,9 @@ export default EStyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginVertical: 10,
+    },
+    containerDisabled: {
+        backgroundColor: '$lightGrey',
     },
     buttonContainer: {
         height: inputHeight,
