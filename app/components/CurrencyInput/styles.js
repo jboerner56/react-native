@@ -8,7 +8,7 @@ export default EStyleSheet.create({
     $buttonBackgroundBaseColor: '$white',
     $buttonBackgroundBaseColorModifier: 0.3,
     container: {
-        background: '$white',
+        backgroundColor: '$white',
         width: '90%',
         height: inputHeight,
         borderRadius: BORDER_RADIUS,
@@ -23,21 +23,21 @@ export default EStyleSheet.create({
         height: inputHeight,
         alignItems: 'center',
         justifyContent: 'center',
-        background: '$white',
+        backgroundColor: '$white',
         borderTopLeftRadius: BORDER_RADIUS,
         borderBottomLeftRadius: BORDER_RADIUS,
     },
     buttonText: {
         fontWeight: '500',
         fontSize: 20,
-        paddingHorizonal: 15,
+        paddingHorizontal: 15,
         color: '$primaryBlue',
     },
     input: {
         height: inputHeight,
         flex: 1,
         fontSize: 16,
-        paddingHorizonal: 6,
+        paddingHorizontal: 6,
         color: '$inputText',
     },
     border: {

@@ -4,18 +4,20 @@
 /* eslint-disable react/jsx-indent */
 import React from 'react';
 import { StatusBar } from 'react-native';
-import Container from '../components/Container';
+import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
 import { Input } from '../components/CurrencyInput';
-import ClearButton from '../components/Buttons';
+// import ClearButton from '../components/Buttons';
+import { ConvertedRate } from '../components/ConversionRate';
 
 const TEMP_BASE_CURRENCY = 'USD';
 const TEMP_QUOTE_CURRENCY = 'GBP';
 const TEMP_BASE_PRICE = '100';
 const TEMP_QUOTE_PRICE = '80';
+const TEMP_CONVERSION_RATE = 1;
+const TEMP_CONVERSION_DATE = new Date();
 
-
-class Home extends React.Component {
+export default class Home extends React.Component {
     handleBaseCurrency = () => {
         console.log('press base currency');
     };
@@ -45,18 +47,22 @@ class Home extends React.Component {
             onChangeText={this.handleChange}
         />
         <Input
-        // eslint-disable-next-line react/jsx-indent-props
         buttonText={TEMP_QUOTE_CURRENCY}
         onPress={this.handleQuoteCurrency}
         editable={false}
         value={TEMP_QUOTE_PRICE}
         />
-        <ClearButton
+        <ConvertedRate
+        base={TEMP_BASE_CURRENCY}
+        quote={TEMP_QUOTE_CURRENCY}
+        date={TEMP_CONVERSION_DATE}
+        conversionRate={TEMP_CONVERSION_RATE}
+        />
+        {/* <ClearButton
             text="Reverse Currencies"
             onPress={this.handleSwap}
-        />
+        /> */}
         </Container>
         );
     }
 }
-export default Home;

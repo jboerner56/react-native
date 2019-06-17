@@ -18,7 +18,7 @@ export default EStyleSheet.create({
         width: imageWidth / 2,
     },
     text: {
-        fontWeigth: '500',
+        fontWeight: '500',
         fontSize: 26,
         marginTop: 10,
         color: '$white',
