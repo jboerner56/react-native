@@ -3,7 +3,7 @@
 /* eslint-disable react/jsx-indent-props */
 /* eslint-disable react/jsx-indent */
 import React from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, KeyboardAvoidingView } from 'react-native';
 import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
 import { Input } from '../components/CurrencyInput';
@@ -44,30 +44,32 @@ export default class Home extends React.Component {
         <Container>
         <StatusBar translucent={false} barStyle="light-content" />
         <Header onPress={this.handleOptionsPress} />
-        <Logo />
-        <Input
-            buttonText={TEMP_BASE_CURRENCY}
-            onPress={this.handleBaseCurrency}
-            defaultValue={TEMP_BASE_PRICE}
-            keyboardType="numeric"
-            onChangeText={this.handleChange}
-        />
-        <Input
-        buttonText={TEMP_QUOTE_CURRENCY}
-        onPress={this.handleQuoteCurrency}
-        editable={false}
-        value={TEMP_QUOTE_PRICE}
-        />
-        <ConvertedRate
-        base={TEMP_BASE_CURRENCY}
-        quote={TEMP_QUOTE_CURRENCY}
-        date={TEMP_CONVERSION_DATE}
-        conversionRate={TEMP_CONVERSION_RATE}
-        />
-        {/* <ClearButton
-            text="Reverse Currencies"
-            onPress={this.handleSwap}
-        /> */}
+        <KeyboardAvoidingView behavior="padding">
+            <Logo />
+            <Input
+                buttonText={TEMP_BASE_CURRENCY}
+                onPress={this.handleBaseCurrency}
+                defaultValue={TEMP_BASE_PRICE}
+                keyboardType="numeric"
+                onChangeText={this.handleChange}
+            />
+            <Input
+            buttonText={TEMP_QUOTE_CURRENCY}
+            onPress={this.handleQuoteCurrency}
+            editable={false}
+            value={TEMP_QUOTE_PRICE}
+            />
+            <ConvertedRate
+            base={TEMP_BASE_CURRENCY}
+            quote={TEMP_QUOTE_CURRENCY}
+            date={TEMP_CONVERSION_DATE}
+            conversionRate={TEMP_CONVERSION_RATE}
+            />
+            {/* <ClearButton
+                text="Reverse Currencies"
+                onPress={this.handleSwap}
+            /> */}
+        </KeyboardAvoidingView>
         </Container>
         );
     }
