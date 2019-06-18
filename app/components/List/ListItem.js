@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable indent */
 /* eslint-disable react/jsx-indent */
 import React from 'react';
@@ -13,11 +14,12 @@ const ListItem = ({
     checkmark = true,
     visible = true,
     customIcon = null,
+    iconBackGround,
 }) => (
     <TouchableHighlight onPress={onPress} underlayColor={style.$underlayColor}>
         <View style={style.row}>
             <Text style={style.text}>{text}</Text>
-            {selected ? <Icon checkmark={checkmark} visible={visible} /> : <Icon />}
+            {selected ? <Icon checkmark={checkmark} visible={visible} iconBackGround={iconBackGround} /> : <Icon />}
             {customIcon}
         </View>
     </TouchableHighlight>
@@ -29,6 +31,7 @@ ListItem.propTypes = {
     checkmark: propTypes.bool,
     visible: propTypes.bool,
     customIcon: propTypes.element,
+    iconBackGround: propTypes.string,
 };
 
 export default ListItem;
