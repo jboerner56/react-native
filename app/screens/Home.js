@@ -4,6 +4,7 @@
 /* eslint-disable react/jsx-indent */
 import React from 'react';
 import { StatusBar, KeyboardAvoidingView } from 'react-native';
+import propTypes from 'prop-types';
 import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
 import { Input } from '../components/CurrencyInput';
@@ -19,12 +20,18 @@ const TEMP_CONVERSION_RATE = 1;
 const TEMP_CONVERSION_DATE = new Date();
 
 export default class Home extends React.Component {
+    static propTypes = {
+        navigation: propTypes.object,
+    }
+
     handleBaseCurrency = () => {
-        console.log('press base currency');
-    };
+        const { navigation } = this.props;
+        navigation.navigate('CurrencyList', { title: 'Base Currency' });
+        };
 
     handleQuoteCurrency = () => {
-        console.log('press quote currency');
+        const { navigation } = this.props;
+        navigation.navigate('CurrencyList', { title: 'Quote Currency' });
     };
 
     handleChange = (text) => {

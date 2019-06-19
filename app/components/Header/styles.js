@@ -1,6 +1,5 @@
 /* eslint-disable indent */
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { StatusBar } from 'react-native';
 
 const styles = EStyleSheet.create({
     container: {
@@ -10,9 +9,6 @@ const styles = EStyleSheet.create({
         top: 0,
         '@media ios': {
             paddingTop: 15,
-        },
-        '@media android': {
-            paddingTop: StatusBar.currentHeight,
         },
     },
     button: {
