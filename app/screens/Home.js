@@ -43,7 +43,8 @@ export default class Home extends React.Component {
     };
 
     handleOptionsPress = () => {
-        console.log('handle options press');
+        const { navigation } = this.props;
+        navigation.navigate('Options');
     };
 
     render() {
