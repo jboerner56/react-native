@@ -4,7 +4,7 @@
 // eslint-disable-next-line react/jsx-indent
 /* eslint-disable indent */
 import React from 'react';
-import { ScrollView, StatusBar, Platform } from 'react-native';
+import { ScrollView, StatusBar, Platform, Linking } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import propTypes from 'prop-types';
 import ListItem from '../components/List/ListItem';
@@ -25,7 +25,7 @@ class Options extends React.Component {
     }
 
     handleSitePress = () => {
-        console.log('press site');
+        Linking.openURL('http://fixer.io').catch(() => alert('An error occured. Please try again'));
     }
 
     render() {
