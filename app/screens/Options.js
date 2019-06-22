@@ -4,11 +4,14 @@
 // eslint-disable-next-line react/jsx-indent
 /* eslint-disable indent */
 import React from 'react';
-import { ScrollView, StatusBar, Platform, Linking } from 'react-native';
+import {
+    ScrollView, StatusBar, Platform, Linking,
+} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import propTypes from 'prop-types';
 import ListItem from '../components/List/ListItem';
 import Separator from '../components/List/Separator';
+import { connectAlert } from '../components/Alert';
 
 const ICON_PREFIX = Platform.os === 'ios' ? 'ios' : 'md';
 const ICON_COLOR = '#868686';
@@ -17,6 +20,7 @@ const ICON_SIZE = '#25';
 class Options extends React.Component {
     static propTypes = {
         navigation: propTypes.object,
+        alertWithType: propTypes.func,
     }
 
     handleThemesPress = () => {
@@ -25,7 +29,8 @@ class Options extends React.Component {
     }
 
     handleSitePress = () => {
-        Linking.openURL('http://fixer.io').catch(() => alert('An error occured. Please try again'));
+        const { alertWithType } = this.props;
+        Linking.openURL('http://fixer.io').catch(() => alertWithType('Error', 'We Apologize', 'database can not be opened right now'));
     }
 
     render() {
@@ -53,4 +58,4 @@ class Options extends React.Component {
     }
 }
 
-export default Options;
+export default connectAlert(Options);
