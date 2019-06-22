@@ -11,6 +11,7 @@ import { Input } from '../components/CurrencyInput';
 // import ClearButton from '../components/Buttons';
 import { ConvertedRate } from '../components/ConversionRate';
 import { Header } from '../components/Header';
+import { swapCurrencies, changeCurrencyAmount } from '../actions/currencyActions';
 
 const TEMP_BASE_CURRENCY = 'USD';
 const TEMP_QUOTE_CURRENCY = 'GBP';
@@ -34,12 +35,13 @@ export default class Home extends React.Component {
         navigation.navigate('CurrencyList', { title: 'Quote Currency' });
     };
 
-    handleChange = (text) => {
-        console.log('change text', text);
+    handleChange = (amount) => {
+        console.log(changeCurrencyAmount(amount));
     };
 
     handleSwap = () => {
-        console.log('currenty swapped');
+        // this.props.dispatch(swapCurrencies());
+        console.log(swapCurrencies());
     };
 
     handleOptionsPress = () => {
