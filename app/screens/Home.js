@@ -3,6 +3,7 @@
 /* eslint-disable react/jsx-indent-props */
 /* eslint-disable react/jsx-indent */
 import React from 'react';
+import { connect } from 'react-redux';
 import { StatusBar, KeyboardAvoidingView } from 'react-native';
 import propTypes from 'prop-types';
 import { Container } from '../components/Container';
@@ -19,9 +20,10 @@ const TEMP_BASE_PRICE = '100';
 const TEMP_QUOTE_PRICE = '80';
 const TEMP_CONVERSION_RATE = 1;
 const TEMP_CONVERSION_DATE = new Date();
-export default class Home extends React.Component {
+class Home extends React.Component {
     static propTypes = {
         navigation: propTypes.object,
+        dispatch: propTypes.func,
     }
 
     handleBaseCurrency = () => {
@@ -35,12 +37,11 @@ export default class Home extends React.Component {
     };
 
     handleChange = (amount) => {
-        console.log(changeCurrencyAmount(amount));
+        this.props.dispatch(changeCurrencyAmount(amount));
     };
 
     handleSwap = () => {
-        // this.props.dispatch(swapCurrencies());
-        console.log(swapCurrencies());
+        this.props.dispatch(swapCurrencies());
     };
 
     handleOptionsPress = () => {
@@ -83,3 +84,5 @@ export default class Home extends React.Component {
         );
     }
 }
+
+export default connect()(Home);
