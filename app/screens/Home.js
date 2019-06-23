@@ -19,7 +19,6 @@ const TEMP_BASE_PRICE = '100';
 const TEMP_QUOTE_PRICE = '80';
 const TEMP_CONVERSION_RATE = 1;
 const TEMP_CONVERSION_DATE = new Date();
-
 export default class Home extends React.Component {
     static propTypes = {
         navigation: propTypes.object,
