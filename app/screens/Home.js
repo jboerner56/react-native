@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable no-console */
 /* eslint-disable indent */
 /* eslint-disable react/jsx-indent-props */
@@ -14,9 +15,6 @@ import { ConvertedRate } from '../components/ConversionRate';
 import { Header } from '../components/Header';
 import { swapCurrencies, changeCurrencyAmount } from '../actions/currencyActions';
 
-const TEMP_BASE_CURRENCY = 'USD';
-const TEMP_QUOTE_CURRENCY = 'GBP';
-const TEMP_BASE_PRICE = '100';
 const TEMP_QUOTE_PRICE = '80';
 const TEMP_CONVERSION_RATE = 1;
 const TEMP_CONVERSION_DATE = new Date();
@@ -24,6 +22,9 @@ class Home extends React.Component {
     static propTypes = {
         navigation: propTypes.object,
         dispatch: propTypes.func,
+        baseCurrency: propTypes.string,
+        quoteCurrency: propTypes.string,
+        amount: propTypes.number,
     }
 
     handleBaseCurrency = () => {
@@ -57,21 +58,21 @@ class Home extends React.Component {
         <KeyboardAvoidingView behavior="padding">
             <Logo />
             <Input
-                buttonText={TEMP_BASE_CURRENCY}
+                buttonText={this.props.baseCurrency}
                 onPress={this.handleBaseCurrency}
-                defaultValue={TEMP_BASE_PRICE}
+                defaultValue={this.props.amount.toString()}
                 keyboardType="numeric"
                 onChangeText={this.handleChange}
             />
             <Input
-            buttonText={TEMP_QUOTE_CURRENCY}
+            buttonText={this.props.quoteCurrency}
             onPress={this.handleQuoteCurrency}
             editable={false}
             value={TEMP_QUOTE_PRICE}
             />
             <ConvertedRate
-            base={TEMP_BASE_CURRENCY}
-            quote={TEMP_QUOTE_CURRENCY}
+            base={this.props.baseCurrency}
+            quote={this.props.quoteCurrency}
             date={TEMP_CONVERSION_DATE}
             conversionRate={TEMP_CONVERSION_RATE}
             />
@@ -85,4 +86,14 @@ class Home extends React.Component {
     }
 }
 
-export default connect()(Home);
+const mapStateToProps = (state) => {
+    const { baseCurrency } = state.currency.baseCurrency;
+    const { quoteCurrency } = state.currency.quoteCurrency;
+    return {
+        baseCurrency,
+        quoteCurrency,
+        amount: state.currencies.amount,
+    };
+};
+
+export default connect(mapStateToProps, null)(Home);
