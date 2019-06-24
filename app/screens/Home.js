@@ -15,9 +15,6 @@ import { ConvertedRate } from '../components/ConversionRate';
 import { Header } from '../components/Header';
 import { swapCurrencies, changeCurrencyAmount } from '../actions/currencyActions';
 
-const TEMP_QUOTE_PRICE = '80';
-const TEMP_CONVERSION_RATE = 1;
-const TEMP_CONVERSION_DATE = new Date();
 class Home extends React.Component {
     static propTypes = {
         navigation: propTypes.object,
@@ -25,6 +22,9 @@ class Home extends React.Component {
         baseCurrency: propTypes.string,
         quoteCurrency: propTypes.string,
         amount: propTypes.number,
+        conversionRate: propTypes.number,
+        isFetching: propTypes.bool,
+        lastConvertedDate: propTypes.object,
     }
 
     handleBaseCurrency = () => {
@@ -51,6 +51,10 @@ class Home extends React.Component {
     };
 
     render() {
+        let quotePrice = (this.props.amount * this.props.conversionRate).toFixed(2);
+        if (this.props.isFetching) {
+            quotePrice = '...';
+        }
         return (
         <Container>
         <StatusBar translucent={false} barStyle="light-content" />
@@ -68,13 +72,13 @@ class Home extends React.Component {
             buttonText={this.props.quoteCurrency}
             onPress={this.handleQuoteCurrency}
             editable={false}
-            value={TEMP_QUOTE_PRICE}
+            value={quotePrice}
             />
             <ConvertedRate
             base={this.props.baseCurrency}
             quote={this.props.quoteCurrency}
-            date={TEMP_CONVERSION_DATE}
-            conversionRate={TEMP_CONVERSION_RATE}
+            date={this.props.lastConvertedDate}
+            conversionRate={this.props.conversionRate}
             />
             {/* <ClearButton
                 text="Reverse Currencies"
@@ -89,10 +93,15 @@ class Home extends React.Component {
 const mapStateToProps = (state) => {
     const { baseCurrency } = state.currency.baseCurrency;
     const { quoteCurrency } = state.currency.quoteCurrency;
+    const { conversionSelector } = state.currency.conversions[baseCurrency] || {};
+    const { rates } = conversionSelector.rates || {};
     return {
         baseCurrency,
         quoteCurrency,
         amount: state.currencies.amount,
+        conversionRate: rates[quoteCurrency] || 0,
+        isFetching: conversionSelector.isFetching,
+        lastConvertedDate: conversionSelector.date ? new Date(conversionSelector.date) : new Date(),
     };
 };
 
