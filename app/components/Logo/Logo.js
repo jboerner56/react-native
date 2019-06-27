@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable no-console */
 /* eslint-disable react/jsx-indent-props */
 /* eslint-disable indent */
@@ -5,11 +6,16 @@
 /* eslint-disable react/jsx-indent */
 import React from 'react';
 import { View, Text, Keyboard, Animated, Platform } from 'react-native';
+import propTypes from 'prop-types';
 import style from './styles';
 
 const ANIMATION_DURATION = 300;
 
 class Logo extends React.Component {
+    static propTypes = {
+        tintColor: propTypes.string,
+    }
+
     constructor(props) {
         super(props);
         this.containerImageWidth = new Animated.Value(style.$largeContainerSize);
@@ -67,6 +73,7 @@ class Logo extends React.Component {
         const imageStyle = [
             style.logo,
             { width: this.imageWidth },
+            this.props.tintColor ? { tintColor: this.props.tintColor } : null,
         ];
 
         return (

@@ -1,3 +1,5 @@
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/jsx-indent-props */
 /* eslint-disable max-len */
 /* eslint-disable react/jsx-indent */
 /* eslint-disable indent */
@@ -19,10 +21,19 @@ const Input = (props) => {
     if (editable === false) {
         containerStyles.push(style.contentDisabled);
     }
+    const buttonTextStyles = [style.buttonText];
+    if (props.textColor) {
+        buttonTextStyles.push({ color: props.textColor });
+    }
+
     return (
-    <View style={style.container}>
-        <TouchableHighlight onPress={onPress} style={style.buttonContainer} underlayColor={underlayColor}>
-            <Text style={style.buttonText}>{buttonText}</Text>
+    <View style={containerStyles}>
+        <TouchableHighlight
+        onPress={onPress}
+        style={style.buttonContainer}
+        underlayColor={underlayColor}
+        >
+            <Text style={buttonTextStyles}>{buttonText}</Text>
         </TouchableHighlight>
         <View style={style.border} />
         <TextInput style={style.input} {...props} underlineColorAndroid="transparent" />
@@ -33,6 +44,7 @@ Input.propTypes = {
     onPress: propTypes.func,
     buttonText: propTypes.string,
     editable: propTypes.bool,
+    textColor: propTypes.string,
 };
 
 export default Input;
