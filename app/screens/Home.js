@@ -13,7 +13,7 @@ import { Input } from '../components/CurrencyInput';
 // import ClearButton from '../components/Buttons';
 import { ConvertedRate } from '../components/ConversionRate';
 import { Header } from '../components/Header';
-import { swapCurrencies, changeCurrencyAmount } from '../actions/currencyActions';
+import { swapCurrencies, changeCurrencyAmount, getItitialConversion } from '../actions/currencyActions';
 
 class Home extends React.Component {
     static propTypes = {
@@ -26,6 +26,10 @@ class Home extends React.Component {
         isFetching: propTypes.bool,
         lastConvertedDate: propTypes.object,
         primaryColor: propTypes.string,
+    }
+
+    componentWillMount() {
+        this.props.dispatch(getItitialConversion());
     }
 
     handleBaseCurrency = () => {
