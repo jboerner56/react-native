@@ -14,6 +14,7 @@ const initialState = {
     quoteCurrency: 'GBP',
     amount: 100,
     conversions: {},
+    error: null,
 };
 
 const setConversions = (state, action) => {
@@ -59,14 +60,24 @@ const reducer = (state = initialState, action) => {
                 case GET_INITIAL_CONVERSION:
                     return {
                         ...state,
+                        conversions: setConversions(state, { currency: state.baseCurrency }),
                     };
                 case CONVERSION_RESULT:
                     return {
                         ...state,
+                        baseCurrency: action.result.base,
+                        conversions: {
+                            ...state.conversions,
+                            [action.result.base]: {
+                                isFetching: false,
+                                ...action.result,
+                            },
+                        },
                     };
                 case CONVERSION_ERROR:
                     return {
                         ...state,
+                        error: action.error,
                     };
         default:
             return state;
