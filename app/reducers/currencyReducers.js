@@ -1,9 +1,12 @@
 /* eslint-disable indent */
 import {
-    swapCurrencies as SWAP_CURRENCY,
-    changeCurrencyAmount as CHANGE_CURRENCY_AMOUNT,
-    changeBaseCurrency as CHANGE_BASE_CURRENCY,
-    changeQuoteCurrency as CHANGE_QUOTE_CURRENCY,
+    SWAP_CURRENCY,
+    CHANGE_CURRENCY_AMOUNT,
+    CHANGE_BASE_CURRENCY,
+    CHANGE_QUOTE_CURRENCY,
+    GET_INITIAL_CONVERSION,
+    CONVERSION_RESULT,
+    CONVERSION_ERROR,
 } from '../actions/currencyActions';
 
 const initialState = {
@@ -53,6 +56,18 @@ const reducer = (state = initialState, action) => {
                     quoteCurrency: action.currency,
                     conversions: setConversions(state, action),
                 };
+                case GET_INITIAL_CONVERSION:
+                    return {
+                        ...state,
+                    };
+                case CONVERSION_RESULT:
+                    return {
+                        ...state,
+                    };
+                case CONVERSION_ERROR:
+                    return {
+                        ...state,
+                    };
         default:
             return state;
     }
