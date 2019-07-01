@@ -13,6 +13,7 @@ import { Input } from '../components/CurrencyInput';
 // import ClearButton from '../components/Buttons';
 import { ConvertedRate } from '../components/ConversionRate';
 import { Header } from '../components/Header';
+import { connectAlert } from '../components/Alert';
 import { swapCurrencies, changeCurrencyAmount, getItitialConversion } from '../actions/currencyActions';
 
 class Home extends React.Component {
@@ -26,10 +27,18 @@ class Home extends React.Component {
         isFetching: propTypes.bool,
         lastConvertedDate: propTypes.object,
         primaryColor: propTypes.string,
+        alertWithType: propTypes.func,
+        currencyError: propTypes.string,
     }
 
     componentWillMount() {
         this.props.dispatch(getItitialConversion());
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.currencyError && nextProps.currencyError !== this.props.currencyError) {
+            this.props.alertWithType('error', 'Error', nextProps.currencyError);
+        }
     }
 
     handleBaseCurrency = () => {
@@ -110,7 +119,8 @@ const mapStateToProps = (state) => {
         isFetching: conversionSelector.isFetching,
         lastConvertedDate: conversionSelector.date ? new Date(conversionSelector.date) : new Date(),
         primaryColor: state.theme.primaryColor,
+        currencyError: state.currencies.error,
     };
 };
 
-export default connect(mapStateToProps, null)(Home);
+export default connect(mapStateToProps, null)(connectAlert(Home));
